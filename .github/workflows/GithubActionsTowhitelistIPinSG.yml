@@ -25,10 +25,10 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '30s'
-    - name: CURL Jenkins
-      run: |
-          curl https://trfx-jenkins-external.services.securitytrfx.com/
-              
+    - name: curl
+      uses: wei/curl@v1
+      with:
+        args: -X GET https://trfx-jenkins-external.services.securitytrfx.com/             
     - name: Remove Github Actions IP from security group
       run: |
         aws ec2 revoke-security-group-ingress --group-id ${{ env.AWS_GROUP_ID }} --protocol tcp --port 443 --cidr ${{ steps.ip.outputs.ipv4 }}/32
