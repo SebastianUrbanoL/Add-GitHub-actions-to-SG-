@@ -12,11 +12,12 @@ jobs:
       run: |
         echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
         echo "AWS_SG_NAME=https-github_actions_sg" >> $GITHUB_ENV
+        echo "AWS_VPC_ID=vpc-0115198b9bf3332b0" >> $GITHUB_ENV
         
     - name: Add Github Actions IP to Security group
       run: |
         aws ec2 describe-security-groups
-        aws ec2 authorize-security-group-ingress --group-name ${{ env.AWS_SG_NAME }} --protocol tcp --port 443 --cidr ${{ steps.ip.outputs.ipv4 }}/32    
+        aws ec2 authorize-security-group-ingress --group-name ${{ env.AWS_SG_NAME }} --vpc-id ${{ env.AWS_VPC_ID }} --protocol tcp --port 443 --cidr ${{ steps.ip.outputs.ipv4 }}/32    
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -31,7 +32,7 @@ jobs:
               
     - name: Remove Github Actions IP from security group
       run: |
-        aws ec2 revoke-security-group-ingress --group-name ${{ env.AWS_SG_NAME }} --protocol tcp --port 443 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+        aws ec2 revoke-security-group-ingress --group-name ${{ env.AWS_SG_NAME }} --vpc-id ${{ env.AWS_VPC_ID }} --protocol tcp --port 443 --cidr ${{ steps.ip.outputs.ipv4 }}/32
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
