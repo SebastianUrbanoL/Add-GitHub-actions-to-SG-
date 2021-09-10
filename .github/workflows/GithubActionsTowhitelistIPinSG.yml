@@ -12,7 +12,7 @@ jobs:
       run: |
         echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
         echo "AWS_SG_NAME=github_actions_sg" >> $GITHUB_ENV
-        echo "AWS_GROUP_ID=vpc-sg-0ef1a17c7fa85032a" >> $GITHUB_ENV
+        echo "AWS_GROUP_ID=sg-0ef1a17c7fa85032a" >> $GITHUB_ENV
         
     - name: Add Github Actions IP to Security group
       run: |
