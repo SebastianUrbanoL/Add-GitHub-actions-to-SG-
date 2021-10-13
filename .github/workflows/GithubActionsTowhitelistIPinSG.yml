@@ -23,7 +23,7 @@ jobs:
         AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
 
 
-##PUT YOUR STEPS HERE
+##PUT YOUR STEPS HERE WHERE YOU ARE CALLING JENKINS (AND WAITING FOR ITS ANSWER)
 
 
     - name: Remove Github Actions IP from security group
