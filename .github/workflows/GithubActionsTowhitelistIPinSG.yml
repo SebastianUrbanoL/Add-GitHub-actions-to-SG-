@@ -21,6 +21,11 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
+        
+    - name: Sleep for 10 seconds while aws apply changes
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
 
 
 ##PUT YOUR STEPS HERE WHERE YOU ARE CALLING JENKINS (AND WAITING FOR ITS ANSWER)
